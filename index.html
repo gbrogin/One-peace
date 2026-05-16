@@ -189,19 +189,21 @@ const INDICATORS = [
   { label: 'Diplomatici',            color: '#FFFFFF' },
 ];
 
+// Lights positioned above continent labels, calibrated on image 1234x864 -> viewBox 960x700
+// Each group is a 3x3 grid spaced 30px H x 26px V, centered above the label
 const ZONES = [
-{ “id”:0, “name”:“America Nord”,
-“lights”:[[129,167],[159,167],[189,167],[129,193],[159,193],[189,193],[129,219],[159,219],[189,219]] },
-{ “id”:1, “name”:“America Sud”,
-“lights”:[[129,394],[159,394],[189,394],[129,420],[159,420],[189,420],[129,446],[159,446],[189,446]] },
-{ “id”:2, “name”:“Europa”,
-“lights”:[[417,179],[447,179],[477,179],[417,205],[447,205],[477,205],[417,231],[447,231],[477,231]] },
-{ “id”:3, “name”:“Africa”,
-“lights”:[[437,402],[467,402],[497,402],[437,428],[467,428],[497,428],[437,454],[467,454],[497,454]] },
-{ “id”:4, “name”:“Asia”,
-“lights”:[[717,216],[747,216],[777,216],[717,242],[747,242],[777,242],[717,268],[747,268],[777,268]] },
-{ “id”:5, “name”:“Oceania”,
-“lights”:[[814,507],[844,507],[874,507],[814,533],[844,533],[874,533],[814,559],[844,559],[874,559]] }
+{ id:0, name:‘America Nord’,
+lights:[[129,167],[159,167],[189,167],[129,193],[159,193],[189,193],[129,219],[159,219],[189,219]] },
+{ id:1, name:‘America Sud’,
+lights:[[129,394],[159,394],[189,394],[129,420],[159,420],[189,420],[129,446],[159,446],[189,446]] },
+{ id:2, name:‘Europa’,
+lights:[[417,179],[447,179],[477,179],[417,205],[447,205],[477,205],[417,231],[447,231],[477,231]] },
+{ id:3, name:‘Africa’,
+lights:[[437,402],[467,402],[497,402],[437,428],[467,428],[497,428],[437,454],[467,454],[497,454]] },
+{ id:4, name:‘Asia’,
+lights:[[717,216],[747,216],[777,216],[717,242],[747,242],[777,242],[717,268],[747,268],[777,268]] },
+{ id:5, name:‘Oceania’,
+lights:[[814,507],[844,507],[874,507],[814,533],[844,533],[874,533],[814,559],[844,559],[874,559]] },
 ];
 
 const lightState = ZONES.map(() => Array(9).fill(false));
@@ -221,7 +223,7 @@ return Math.min(ZONES.reduce((s,z,zi) => s + getEscalation(lightState[zi]), 0), 
 function updateEscBar() {
 const count = totalEsc();
 document.getElementById(‘esc-label’).textContent = ‘ESCALATION ’ + count + ‘/20’;
-document.querySelectorAll(’.seg’).forEach((seg, i) => {
+document.querySelectorAll(’.seg’).forEach(function(seg, i) {
 if (i < count) {
 seg.style.background = i < 7 ? ‘#FF6666’ : i < 14 ? ‘#FF2222’ : ‘#AA0000’;
 seg.style.boxShadow = i >= 14 ? ‘0 0 8px #AA0000’ : ‘none’;
@@ -230,7 +232,7 @@ seg.style.background = ‘rgba(255,255,255,0.06)’;
 seg.style.boxShadow = ‘none’;
 }
 });
-const bar = document.getElementById(‘esc-bar’);
+var bar = document.getElementById(‘esc-bar’);
 bar.style.borderColor = count > 14 ? ‘rgba(255,30,30,0.4)’ : ‘rgba(160,50,50,0.2)’;
 bar.style.boxShadow = count > 14 ? ‘0 0 18px rgba(255,10,10,0.3)’ : ‘none’;
 if (count >= 20) document.getElementById(‘gameover’).classList.add(‘show’);
@@ -238,9 +240,9 @@ if (count >= 20) document.getElementById(‘gameover’).classList.add(‘show�
 
 function toggleLight(zi, li) {
 lightState[zi][li] = !lightState[zi][li];
-const on = lightState[zi][li];
-const circle = document.getElementById(‘c-’ + zi + ‘-’ + li);
-const glow   = document.getElementById(‘g-’ + zi + ‘-’ + li);
+var on = lightState[zi][li];
+var circle = document.getElementById(‘c-’ + zi + ‘-’ + li);
+var glow   = document.getElementById(‘g-’ + zi + ‘-’ + li);
 if (circle) {
 circle.setAttribute(‘r’, on ? ‘9’ : ‘7’);
 circle.setAttribute(‘fill’, on ? ‘#FF2222’ : ‘rgba(30,15,15,0.5)’);
@@ -254,40 +256,42 @@ updateEscBar();
 }
 
 function pickRandom() {
-const btn = document.getElementById(‘globe-btn’);
+var btn = document.getElementById(‘globe-btn’);
 btn.style.animation = ‘spin 0.65s linear’;
-setTimeout(() => {
+setTimeout(function() {
 btn.style.animation = ‘none’;
-const zi = Math.floor(Math.random() * ZONES.length);
+var zi = Math.floor(Math.random() * ZONES.length);
 document.getElementById(‘zone-label’).textContent = ZONES[zi].name;
-ZONES[zi].lights.forEach(([cx,cy], li) => {
-const ring = document.getElementById(‘ring-’ + zi + ‘-’ + li);
+ZONES[zi].lights.forEach(function(pos, li) {
+var ring = document.getElementById(‘ring-’ + zi + ‘-’ + li);
 if (ring) {
 ring.setAttribute(‘display’, ‘block’);
-setTimeout(() => ring.setAttribute(‘display’, ‘none’), 2800);
+setTimeout(function() { ring.setAttribute(‘display’, ‘none’); }, 2800);
 }
 });
 }, 650);
 }
 
 function buildSVG() {
-const svg = document.getElementById(‘map-svg’);
-const ns = ‘http://www.w3.org/2000/svg’;
-ZONES.forEach((zone, zi) => {
-const g = document.createElementNS(ns, ‘g’);
-zone.lights.forEach(([cx, cy], li) => {
-const glow = document.createElementNS(ns, ‘circle’);
-glow.setAttribute(‘id’, ‘g-’ + zi + ‘-’ + li);
-glow.setAttribute(‘cx’, cx); glow.setAttribute(‘cy’, cy);
-glow.setAttribute(‘r’, ‘14’);
-glow.setAttribute(‘fill’, ‘#FF0000’);
-glow.setAttribute(‘opacity’, ‘0.2’);
-glow.setAttribute(‘filter’, ‘url(#litglow)’);
-glow.setAttribute(‘display’, ‘none’);
-g.appendChild(glow);
+var svg = document.getElementById(‘map-svg’);
+var ns = ‘http://www.w3.org/2000/svg’;
+ZONES.forEach(function(zone, zi) {
+var g = document.createElementNS(ns, ‘g’);
+zone.lights.forEach(function(pos, li) {
+var cx = pos[0], cy = pos[1];
 
 ```
-  const ring = document.createElementNS(ns, 'circle');
+  var glow = document.createElementNS(ns, 'circle');
+  glow.setAttribute('id', 'g-' + zi + '-' + li);
+  glow.setAttribute('cx', cx); glow.setAttribute('cy', cy);
+  glow.setAttribute('r', '14');
+  glow.setAttribute('fill', '#FF0000');
+  glow.setAttribute('opacity', '0.2');
+  glow.setAttribute('filter', 'url(#litglow)');
+  glow.setAttribute('display', 'none');
+  g.appendChild(glow);
+
+  var ring = document.createElementNS(ns, 'circle');
   ring.setAttribute('id', 'ring-' + zi + '-' + li);
   ring.setAttribute('cx', cx); ring.setAttribute('cy', cy);
   ring.setAttribute('r', '13');
@@ -298,15 +302,15 @@ g.appendChild(glow);
   ring.setAttribute('display', 'none');
   g.appendChild(ring);
 
-  const hit = document.createElementNS(ns, 'circle');
+  var hit = document.createElementNS(ns, 'circle');
   hit.setAttribute('cx', cx); hit.setAttribute('cy', cy);
   hit.setAttribute('r', '16');
   hit.setAttribute('fill', 'transparent');
   hit.style.cursor = 'pointer';
-  hit.addEventListener('click', () => toggleLight(zi, li));
+  hit.addEventListener('click', (function(z,l){ return function(){ toggleLight(z,l); }; })(zi,li));
   g.appendChild(hit);
 
-  const circle = document.createElementNS(ns, 'circle');
+  var circle = document.createElementNS(ns, 'circle');
   circle.setAttribute('id', 'c-' + zi + '-' + li);
   circle.setAttribute('cx', cx); circle.setAttribute('cy', cy);
   circle.setAttribute('r', '7');
@@ -323,42 +327,55 @@ svg.appendChild(g);
 }
 
 function buildEscBar() {
-const cont = document.getElementById(‘esc-segments’);
-for (let i = 0; i < 20; i++) {
-const seg = document.createElement(‘div’);
+var cont = document.getElementById(‘esc-segments’);
+for (var i = 0; i < 20; i++) {
+var seg = document.createElement(‘div’);
 seg.className = ‘seg’;
 cont.appendChild(seg);
 }
 }
 
 function buildTeams() {
-const col = document.getElementById(‘left-col’);
-[‘Squadra 1’,‘Squadra 2’,‘Squadra 3’,‘Squadra 4’,‘Squadra 5’,‘Squadra 6’].forEach(name => {
-const card = document.createElement(‘div’);
+var col = document.getElementById(‘left-col’);
+var names = [‘Squadra 1’,‘Squadra 2’,‘Squadra 3’,‘Squadra 4’,‘Squadra 5’,‘Squadra 6’];
+names.forEach(function(name) {
+var card = document.createElement(‘div’);
 card.className = ‘team-card’;
-const inp = document.createElement(‘input’);
-inp.className = ‘team-name’; inp.value = name;
+
+```
+var inp = document.createElement('input');
+inp.className = 'team-name';
+inp.value = name;
 card.appendChild(inp);
-INDICATORS.forEach(ind => {
-const row = document.createElement(‘div’);
-row.className = ‘indicator-row’;
-const dot = document.createElement(‘div’);
-dot.className = ‘indicator-dot’;
-dot.style.background = ind.color;
-dot.style.boxShadow = ’0 0 4px ’ + ind.color;
-const lbl = document.createElement(‘span’);
-lbl.className = ‘indicator-label’;
-lbl.style.color = ind.color;
-lbl.textContent = ind.label;
-const val = document.createElement(‘input’);
-val.className = ‘indicator-input’;
-val.style.background = ind.color === ‘#FFFFFF’ ? ‘rgba(255,255,255,0.08)’ : ind.color + ‘18’;
-val.style.border = ’1px solid ’ + ind.color + ‘55’;
-val.style.color = ind.color;
-row.appendChild(dot); row.appendChild(lbl); row.appendChild(val);
-card.appendChild(row);
+
+INDICATORS.forEach(function(ind) {
+  var row = document.createElement('div');
+  row.className = 'indicator-row';
+
+  var dot = document.createElement('div');
+  dot.className = 'indicator-dot';
+  dot.style.background = ind.color;
+  dot.style.boxShadow = '0 0 4px ' + ind.color;
+
+  var lbl = document.createElement('span');
+  lbl.className = 'indicator-label';
+  lbl.style.color = ind.color;
+  lbl.textContent = ind.label;
+
+  var val = document.createElement('input');
+  val.className = 'indicator-input';
+  val.style.background = ind.color === '#FFFFFF' ? 'rgba(255,255,255,0.08)' : ind.color + '18';
+  val.style.border = '1px solid ' + ind.color + '55';
+  val.style.color = ind.color;
+
+  row.appendChild(dot);
+  row.appendChild(lbl);
+  row.appendChild(val);
+  card.appendChild(row);
 });
 col.appendChild(card);
+```
+
 });
 }
 
