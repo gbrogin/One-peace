@@ -16,8 +16,8 @@ body {
 }
 #title {
   text-align: center; padding: 4px 0 2px;
-  font-family: 'Cinzel', serif; font-size: 16px; font-weight: 900;
-  letter-spacing: 10px; color: #DDD0C0;
+  font-family: 'Cinzel', serif; font-size: 15px; font-weight: 900;
+  letter-spacing: 8px; color: #DDD0C0;
   text-shadow: 0 0 18px rgba(100,200,255,0.3);
   flex-shrink: 0;
 }
@@ -25,42 +25,43 @@ body {
   display: flex; flex: 1; gap: 5px;
   padding: 3px 6px 6px; min-height: 0;
 }
-.col {
-  width: 142px; flex-shrink: 0;
+#left-col {
+  width: 170px; flex-shrink: 0;
   display: flex; flex-direction: column;
+  gap: 4px;
 }
 .team-card {
   background: rgba(255,255,255,0.05);
   border: 1px solid rgba(255,255,255,0.1);
-  border-radius: 9px; padding: 6px 8px;
-  flex: 1; margin-bottom: 5px;
+  border-radius: 8px; padding: 5px 7px;
   display: flex; flex-direction: column;
+  flex: 1;
 }
 .team-name {
   background: transparent; border: none;
   border-bottom: 1px solid rgba(255,255,255,0.18);
   color: #EDE0D0; font-family: 'Cinzel', serif;
-  font-size: 10px; font-weight: 700; width: 100%;
-  margin-bottom: 5px; outline: none;
+  font-size: 9px; font-weight: 700; width: 100%;
+  margin-bottom: 4px; outline: none;
   text-align: center; letter-spacing: 1px;
 }
 .indicator-row {
   display: flex; align-items: center;
-  margin-bottom: 3px; gap: 4px;
+  margin-bottom: 2px; gap: 4px;
 }
 .indicator-dot {
   width: 5px; height: 5px; border-radius: 50%;
   flex-shrink: 0;
 }
 .indicator-label {
-  font-size: 7.5px; flex: 1;
+  font-size: 7px; flex: 1;
   font-family: 'Lato', sans-serif;
   opacity: 0.9; line-height: 1.1;
 }
 .indicator-input {
-  width: 28px; border-radius: 3px;
+  width: 26px; border-radius: 3px;
   font-family: 'Lato', sans-serif;
-  font-size: 10px; font-weight: 700;
+  font-size: 9px; font-weight: 700;
   text-align: center; outline: none;
   padding: 1px 0; -webkit-appearance: none;
 }
@@ -95,9 +96,7 @@ body {
   font-size: 7.5px; letter-spacing: 2px;
   margin-bottom: 3px;
 }
-#esc-segments {
-  display: flex; gap: 3px;
-}
+#esc-segments { display: flex; gap: 3px; }
 .seg {
   flex: 1; height: 16px; border-radius: 3px;
   background: rgba(255,255,255,0.06);
@@ -121,8 +120,7 @@ body {
   margin-top: 2px;
 }
 #gameover {
-  display: none;
-  position: fixed; inset: 0;
+  display: none; position: fixed; inset: 0;
   background: rgba(0,0,0,0.95);
   flex-direction: column;
   align-items: center; justify-content: center;
@@ -141,8 +139,6 @@ body {
   color: #FF8888; font-family: 'Lato', sans-serif;
   font-size: 15px; letter-spacing: 3px;
 }
-.light { cursor: pointer; }
-.light:hover .main-circle { filter: brightness(1.5); }
 @keyframes redpulse { 0%,100%{opacity:1} 50%{opacity:0.4} }
 @keyframes spin { to { transform: rotate(360deg); } }
 @keyframes gp {
@@ -156,10 +152,7 @@ body {
 <div id="title">ONE PEACE</div>
 
 <div id="body">
-  <!-- LEFT TEAMS -->
-  <div class="col" id="left-col"></div>
-
-  <!-- CENTER -->
+  <div id="left-col"></div>
 
   <div id="center">
     <div id="map-container">
@@ -167,7 +160,7 @@ body {
       <svg id="map-svg" viewBox="0 0 960 700" preserveAspectRatio="xMidYMid meet">
         <defs>
           <filter id="litglow" x="-100%" y="-100%" width="300%" height="300%">
-            <feGaussianBlur stdDeviation="7" result="b"/>
+            <feGaussianBlur stdDeviation="6" result="b"/>
             <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
           </filter>
           <filter id="txtglow" x="-20%" y="-20%" width="140%" height="140%">
@@ -192,10 +185,6 @@ body {
 ```
 
   </div>
-
-  <!-- RIGHT TEAMS -->
-
-  <div class="col" id="right-col"></div>
 </div>
 
 <div id="gameover">
@@ -205,28 +194,27 @@ body {
 
 <script>
 const INDICATORS = [
-  { label: 'Op. Umanitari', color: '#FF4444' },
-  { label: 'Med. Culturali', color: '#44CC66' },
-  { label: 'Resp. Logistica', color: '#55AAFF' },
-  { label: 'Diplomatici',    color: '#FFD700' },
+  { label: 'Operatori umanitari',  color: '#44CC66' },
+  { label: 'Mediatori linguistici', color: '#FFD700' },
+  { label: 'Resp. logistica',       color: '#55AAFF' },
+  { label: 'Diplomatici',           color: '#FFFFFF' },
 ];
 
 const ZONES = [
   { id:0, name:'America Nord',
-    lights:[[90,160],[175,120],[255,155],[80,240],[170,210],[250,240],[85,320],[175,300],[255,320]] },
+    lights:[[90,155],[175,115],[255,150],[80,235],[170,205],[250,235],[85,315],[175,295],[255,315]] },
   { id:1, name:'America Sud',
-    lights:[[115,430],[195,415],[265,435],[110,510],[195,500],[260,515],[115,590],[195,580],[260,595]] },
+    lights:[[115,425],[195,410],[265,430],[110,505],[195,495],[260,510],[115,585],[195,575],[260,590]] },
   { id:2, name:'Europa',
-    lights:[[435,130],[510,110],[585,135],[430,210],[510,195],[580,215],[435,285],[510,270],[580,285]] },
+    lights:[[435,125],[510,105],[585,130],[430,205],[510,190],[580,210],[435,280],[510,265],[580,280]] },
   { id:3, name:'Africa',
-    lights:[[435,360],[510,345],[585,365],[430,440],[510,430],[585,445],[435,520],[510,510],[580,525]] },
+    lights:[[435,355],[510,340],[585,360],[430,435],[510,425],[585,440],[435,515],[510,505],[580,520]] },
   { id:4, name:'Asia',
-    lights:[[700,120],[800,100],[900,120],[695,230],[800,215],[900,235],[700,345],[800,330],[895,350]] },
+    lights:[[700,115],[800,95],[895,115],[695,225],[800,210],[893,228],[700,340],[800,325],[890,343]] },
   { id:5, name:'Oceania',
-    lights:[[810,490],[890,480],[955,490],[808,560],[890,550],[953,562],[812,630],[890,622],[952,632]] },
+    lights:[[808,485],[887,475],[952,485],[806,555],[887,545],[950,557],[810,625],[887,617],[950,627]] },
 ];
 
-// State
 const lightState = ZONES.map(() => Array(9).fill(false));
 let highlightedZone = null;
 
@@ -245,55 +233,36 @@ function totalEsc() {
 function updateEscBar() {
   const count = totalEsc();
   document.getElementById('esc-label').textContent = 'ESCALATION ' + count + '/20';
-  const segs = document.querySelectorAll('.seg');
-  segs.forEach((seg, i) => {
+  document.querySelectorAll('.seg').forEach((seg, i) => {
     if (i < count) {
-      if (i < 7) seg.style.background = '#FF6666';
-      else if (i < 14) seg.style.background = '#FF2222';
-      else seg.style.background = '#AA0000';
-      seg.style.boxShadow = (i >= 14) ? '0 0 8px #AA0000' : 'none';
+      seg.style.background = i < 7 ? '#FF6666' : i < 14 ? '#FF2222' : '#AA0000';
+      seg.style.boxShadow = i >= 14 ? '0 0 8px #AA0000' : 'none';
     } else {
       seg.style.background = 'rgba(255,255,255,0.06)';
       seg.style.boxShadow = 'none';
     }
   });
-  document.getElementById('esc-bar').style.borderColor =
-    count > 14 ? 'rgba(255,30,30,0.4)' : 'rgba(160,50,50,0.2)';
-  document.getElementById('esc-bar').style.boxShadow =
-    count > 14 ? '0 0 18px rgba(255,10,10,0.3)' : 'none';
-  if (count >= 20) {
-    document.getElementById('gameover').classList.add('show');
-  }
+  const bar = document.getElementById('esc-bar');
+  bar.style.borderColor = count > 14 ? 'rgba(255,30,30,0.4)' : 'rgba(160,50,50,0.2)';
+  bar.style.boxShadow = count > 14 ? '0 0 18px rgba(255,10,10,0.3)' : 'none';
+  if (count >= 20) document.getElementById('gameover').classList.add('show');
 }
 
 function toggleLight(zi, li) {
   lightState[zi][li] = !lightState[zi][li];
-  renderLight(zi, li);
-  updateEscBar();
-}
-
-function renderLight(zi, li) {
   const on = lightState[zi][li];
   const circle = document.getElementById('c-' + zi + '-' + li);
-  const glow = document.getElementById('g-' + zi + '-' + li);
-  if (!circle) return;
-  if (on) {
-    circle.setAttribute('r', '14');
-    circle.setAttribute('fill', '#FF2222');
-    circle.setAttribute('stroke', '#FF9999');
-    circle.setAttribute('stroke-width', '2');
-    circle.style.filter = 'drop-shadow(0 0 8px #FF0000) drop-shadow(0 0 18px #FF000099)';
-    circle.style.animation = 'redpulse 2s infinite';
-    if (glow) glow.setAttribute('display', 'block');
-  } else {
-    circle.setAttribute('r', '10');
-    circle.setAttribute('fill', 'rgba(30,15,15,0.5)');
-    circle.setAttribute('stroke', 'rgba(200,150,150,0.35)');
-    circle.setAttribute('stroke-width', '1.5');
-    circle.style.filter = 'none';
-    circle.style.animation = 'none';
-    if (glow) glow.setAttribute('display', 'none');
+  const glow   = document.getElementById('g-' + zi + '-' + li);
+  if (circle) {
+    circle.setAttribute('r', on ? '9' : '7');
+    circle.setAttribute('fill', on ? '#FF2222' : 'rgba(30,15,15,0.5)');
+    circle.setAttribute('stroke', on ? '#FF9999' : 'rgba(200,150,150,0.35)');
+    circle.setAttribute('stroke-width', on ? '2' : '1.5');
+    circle.style.filter = on ? 'drop-shadow(0 0 6px #FF0000) drop-shadow(0 0 14px #FF000099)' : 'none';
+    circle.style.animation = on ? 'redpulse 2s infinite' : 'none';
   }
+  if (glow) glow.setAttribute('display', on ? 'block' : 'none');
+  updateEscBar();
 }
 
 function pickRandom() {
@@ -303,7 +272,6 @@ function pickRandom() {
     btn.style.animation = 'none';
     highlightedZone = Math.floor(Math.random() * ZONES.length);
     document.getElementById('zone-label').textContent = ZONES[highlightedZone].name;
-    // Flash highlight rings
     ZONES[highlightedZone].lights.forEach(([cx,cy], li) => {
       const ring = document.getElementById('ring-' + highlightedZone + '-' + li);
       if (ring) {
@@ -314,53 +282,48 @@ function pickRandom() {
   }, 650);
 }
 
-// Build SVG lights
 function buildSVG() {
   const svg = document.getElementById('map-svg');
+  const ns = 'http://www.w3.org/2000/svg';
   ZONES.forEach((zone, zi) => {
-    const g = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+    const g = document.createElementNS(ns, 'g');
     zone.lights.forEach(([cx, cy], li) => {
-      // Glow halo
-      const glow = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+      const glow = document.createElementNS(ns, 'circle');
       glow.setAttribute('id', 'g-' + zi + '-' + li);
       glow.setAttribute('cx', cx); glow.setAttribute('cy', cy);
-      glow.setAttribute('r', '20');
+      glow.setAttribute('r', '16');
       glow.setAttribute('fill', '#FF0000');
       glow.setAttribute('opacity', '0.2');
       glow.setAttribute('filter', 'url(#litglow)');
       glow.setAttribute('display', 'none');
       g.appendChild(glow);
 
-      // Highlight ring
-      const ring = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+      const ring = document.createElementNS(ns, 'circle');
       ring.setAttribute('id', 'ring-' + zi + '-' + li);
       ring.setAttribute('cx', cx); ring.setAttribute('cy', cy);
-      ring.setAttribute('r', '20');
+      ring.setAttribute('r', '16');
       ring.setAttribute('fill', 'none');
       ring.setAttribute('stroke', '#FFE566');
       ring.setAttribute('stroke-width', '2');
-      ring.setAttribute('opacity', '0.6');
+      ring.setAttribute('opacity', '0.7');
       ring.setAttribute('display', 'none');
       g.appendChild(ring);
 
-      // Click target
-      const hit = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+      const hit = document.createElementNS(ns, 'circle');
       hit.setAttribute('cx', cx); hit.setAttribute('cy', cy);
-      hit.setAttribute('r', '26');
+      hit.setAttribute('r', '20');
       hit.setAttribute('fill', 'transparent');
       hit.style.cursor = 'pointer';
       hit.addEventListener('click', () => toggleLight(zi, li));
       g.appendChild(hit);
 
-      // Main light
-      const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+      const circle = document.createElementNS(ns, 'circle');
       circle.setAttribute('id', 'c-' + zi + '-' + li);
       circle.setAttribute('cx', cx); circle.setAttribute('cy', cy);
-      circle.setAttribute('r', '10');
+      circle.setAttribute('r', '7');
       circle.setAttribute('fill', 'rgba(30,15,15,0.5)');
       circle.setAttribute('stroke', 'rgba(200,150,150,0.35)');
       circle.setAttribute('stroke-width', '1.5');
-      circle.classList.add('main-circle');
       circle.style.pointerEvents = 'none';
       g.appendChild(circle);
     });
@@ -368,7 +331,6 @@ function buildSVG() {
   });
 }
 
-// Build escalation segments
 function buildEscBar() {
   const cont = document.getElementById('esc-segments');
   for (let i = 0; i < 20; i++) {
@@ -378,45 +340,45 @@ function buildEscBar() {
   }
 }
 
-// Build team cards
 function buildTeams() {
-  const teams = [
-    { el: 'left-col',  names: ['Squadra 1','Squadra 2','Squadra 3'] },
-    { el: 'right-col', names: ['Squadra 4','Squadra 5','Squadra 6'] },
-  ];
-  teams.forEach(({ el, names }) => {
-    const col = document.getElementById(el);
-    names.forEach(name => {
-      const card = document.createElement('div');
-      card.className = 'team-card';
-      const inp = document.createElement('input');
-      inp.className = 'team-name'; inp.value = name;
-      card.appendChild(inp);
-      INDICATORS.forEach(ind => {
-        const row = document.createElement('div');
-        row.className = 'indicator-row';
-        const dot = document.createElement('div');
-        dot.className = 'indicator-dot';
-        dot.style.background = ind.color;
-        dot.style.boxShadow = '0 0 4px ' + ind.color;
-        const lbl = document.createElement('span');
-        lbl.className = 'indicator-label';
-        lbl.style.color = ind.color;
-        lbl.textContent = ind.label;
-        const val = document.createElement('input');
-        val.className = 'indicator-input';
-        val.style.background = ind.color + '18';
-        val.style.border = '1px solid ' + ind.color + '44';
-        val.style.color = ind.color;
-        row.appendChild(dot); row.appendChild(lbl); row.appendChild(val);
-        card.appendChild(row);
-      });
-      col.appendChild(card);
+  const col = document.getElementById('left-col');
+  const names = ['Squadra 1','Squadra 2','Squadra 3','Squadra 4','Squadra 5','Squadra 6'];
+  names.forEach(name => {
+    const card = document.createElement('div');
+    card.className = 'team-card';
+
+    const inp = document.createElement('input');
+    inp.className = 'team-name';
+    inp.value = name;
+    card.appendChild(inp);
+
+    INDICATORS.forEach(ind => {
+      const row = document.createElement('div');
+      row.className = 'indicator-row';
+
+      const dot = document.createElement('div');
+      dot.className = 'indicator-dot';
+      dot.style.background = ind.color;
+      dot.style.boxShadow = '0 0 4px ' + ind.color;
+
+      const lbl = document.createElement('span');
+      lbl.className = 'indicator-label';
+      lbl.style.color = ind.color;
+      lbl.textContent = ind.label;
+
+      const val = document.createElement('input');
+      val.className = 'indicator-input';
+      val.style.background = ind.color === '#FFFFFF' ? 'rgba(255,255,255,0.08)' : ind.color + '18';
+      val.style.border = '1px solid ' + ind.color + '55';
+      val.style.color = ind.color;
+
+      row.appendChild(dot); row.appendChild(lbl); row.appendChild(val);
+      card.appendChild(row);
     });
+    col.appendChild(card);
   });
 }
 
-// Init
 buildTeams();
 buildEscBar();
 buildSVG();
