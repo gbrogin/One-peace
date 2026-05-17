@@ -13,11 +13,11 @@ body{width:100vw;height:100vh;overflow:hidden;background:linear-gradient(155deg,
 #body{display:flex;flex:1;gap:5px;padding:3px 6px 6px;min-height:0;}
 #lc{width:175px;flex-shrink:0;display:flex;flex-direction:column;gap:4px;}
 .tc{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:8px;padding:5px 7px;display:flex;flex-direction:column;flex:1;}
-.tn{background:transparent;border:none;border-bottom:1px solid rgba(255,255,255,0.18);color:#EDE0D0;font-family:Cinzel,serif;font-size:9px;font-weight:700;width:100%;margin-bottom:4px;outline:none;text-align:center;letter-spacing:1px;}
-.ir{display:flex;align-items:center;margin-bottom:2px;gap:4px;}
-.id{width:5px;height:5px;border-radius:50%;flex-shrink:0;}
-.il{font-size:6.8px;flex:1;font-family:Lato,sans-serif;opacity:0.9;line-height:1.1;}
-.iv{width:26px;border-radius:3px;font-family:Lato,sans-serif;font-size:9px;font-weight:700;text-align:center;outline:none;padding:1px 0;-webkit-appearance:none;}
+.tn{background:transparent;border:none;border-bottom:1px solid rgba(255,255,255,0.18);color:#EDE0D0;font-family:Cinzel,serif;font-size:12px;font-weight:700;width:100%;margin-bottom:5px;outline:none;text-align:center;letter-spacing:1px;}
+.ir{display:flex;align-items:center;margin-bottom:3px;gap:4px;}
+.id{width:6px;height:6px;border-radius:50%;flex-shrink:0;}
+.il{font-size:9px;flex:1;font-family:Lato,sans-serif;opacity:0.9;line-height:1.2;}
+.iv{width:30px;border-radius:3px;font-family:Lato,sans-serif;font-size:11px;font-weight:700;text-align:center;outline:none;padding:2px 0;-webkit-appearance:none;}
 #cn{flex:1;display:flex;flex-direction:column;gap:5px;min-width:0;}
 #mc{flex:1;position:relative;border:2px solid rgba(100,80,40,0.7);border-radius:10px;overflow:hidden;box-shadow:0 0 20px rgba(0,0,0,0.8);}
 #mi{position:absolute;inset:0;width:100%;height:100%;object-fit:fill;display:block;}
@@ -30,8 +30,7 @@ body{width:100vw;height:100vh;overflow:hidden;background:linear-gradient(155deg,
 #zl{color:#FFE566;font-family:Cinzel,serif;font-size:7px;text-align:center;max-width:70px;line-height:1.2;margin-top:2px;}
 #go{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.95);flex-direction:column;align-items:center;justify-content:center;z-index:9999;}
 #go.show{display:flex;}
-#gt{font-family:Cinzel,serif;font-size:clamp(44px,7vw,76px);font-weight:900;color:#FF1C1C;letter-spacing:10px;animation:gp 1.4s infinite;margin-bottom:14px;}
-#gs{color:#FF8888;font-family:Lato,sans-serif;font-size:15px;letter-spacing:3px;}
+#gt{font-family:Cinzel,serif;font-size:clamp(44px,7vw,76px);font-weight:900;color:#FF1C1C;letter-spacing:10px;animation:gp 1.4s infinite;}
 @keyframes rp{0%,100%{opacity:1}50%{opacity:0.4}}
 @keyframes spin{to{transform:rotate(360deg)}}
 @keyframes gp{0%,100%{text-shadow:0 0 40px #f00,0 0 80px #f0004d}50%{text-shadow:0 0 80px #f00,0 0 160px #f000bb}}
@@ -60,7 +59,7 @@ body{width:100vw;height:100vh;overflow:hidden;background:linear-gradient(155deg,
 </div>
 </div>
 </div>
-<div id="go"><div id="gt">GAME OVER</div><div id="gs">La barra di escalation e al massimo</div></div>
+<div id="go"><div id="gt">GAME OVER</div></div>
 <script>
 var IN=[
   {l:'Operatori umanitari',c:'#44CC66'},
