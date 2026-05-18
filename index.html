@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="it">
 <head>
 <meta charset="UTF-8"/>
@@ -13,11 +12,16 @@ body{width:100vw;height:100vh;overflow:hidden;background:linear-gradient(155deg,
 #body{display:flex;flex:1;gap:5px;padding:3px 6px 6px;min-height:0;}
 #lc{width:175px;flex-shrink:0;display:flex;flex-direction:column;gap:4px;}
 .tc{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:8px;padding:5px 7px;display:flex;flex-direction:column;flex:1;}
-.tn{background:transparent;border:none;border-bottom:1px solid rgba(255,255,255,0.18);color:#EDE0D0;font-family:Cinzel,serif;font-size:12px;font-weight:700;width:100%;margin-bottom:5px;outline:none;text-align:center;letter-spacing:1px;}
-.ir{display:flex;align-items:center;margin-bottom:3px;gap:4px;}
+.tn{background:transparent;border:none;border-bottom:1px solid rgba(255,255,255,0.18);color:#EDE0D0;font-family:Cinzel,serif;font-size:12px;font-weight:700;width:100%;margin-bottom:4px;outline:none;text-align:center;letter-spacing:1px;}
+.ir{display:flex;align-items:center;margin-bottom:2px;gap:4px;}
 .id{width:6px;height:6px;border-radius:50%;flex-shrink:0;}
-.il{font-size:9px;flex:1;font-family:Lato,sans-serif;opacity:0.9;line-height:1.2;}
+.il{font-size:9px;flex:1;font-family:Lato,sans-serif;opacity:0.9;line-height:1.1;}
 .iv{width:30px;border-radius:3px;font-family:Lato,sans-serif;font-size:11px;font-weight:700;text-align:center;outline:none;padding:2px 0;-webkit-appearance:none;}
+.bp-row{display:flex;align-items:center;justify-content:space-between;margin-top:4px;padding-top:4px;border-top:1px solid rgba(255,255,255,0.1);}
+.bp-lbl{font-size:8px;color:#FFD700;font-family:Cinzel,serif;letter-spacing:1px;}
+.bp-ctrl{display:flex;align-items:center;gap:4px;}
+.bp-btn{width:18px;height:18px;border-radius:3px;border:1px solid rgba(255,215,0,0.4);background:rgba(255,215,0,0.1);color:#FFD700;font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center;line-height:1;}
+.bp-val{min-width:24px;text-align:center;color:#FFD700;font-family:Cinzel,serif;font-size:13px;font-weight:900;}
 #cn{flex:1;display:flex;flex-direction:column;gap:5px;min-width:0;}
 #mc{flex:1;position:relative;border:2px solid rgba(100,80,40,0.7);border-radius:10px;overflow:hidden;box-shadow:0 0 20px rgba(0,0,0,0.8);}
 #mi{position:absolute;inset:0;width:100%;height:100%;object-fit:fill;display:block;}
@@ -26,14 +30,30 @@ body{width:100vw;height:100vh;overflow:hidden;background:linear-gradient(155deg,
 #el{color:#FF4444;font-family:Cinzel,serif;font-size:11px;letter-spacing:2px;margin-bottom:5px;font-weight:700;}
 #es{display:flex;gap:4px;}
 .sg{width:22px;height:22px;border-radius:4px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);transition:background 0.2s;flex-shrink:0;}
-#gb{width:46px;height:46px;border-radius:50%;background:linear-gradient(135deg,#3a2800,#1a1000);border:1.5px solid rgba(200,150,50,0.5);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:24px;flex-shrink:0;}
-#zl{color:#FFE566;font-family:Cinzel,serif;font-size:7px;text-align:center;max-width:70px;line-height:1.2;margin-top:2px;}
+#controls{display:flex;flex-direction:column;align-items:center;gap:6px;flex-shrink:0;}
+#globe-btn{width:46px;height:46px;border-radius:50%;background:linear-gradient(135deg,#3a2800,#1a1000);border:1.5px solid rgba(200,150,50,0.5);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:24px;flex-shrink:0;}
+#timer-btn{width:46px;height:20px;border-radius:4px;background:rgba(0,100,60,0.3);border:1px solid rgba(0,200,100,0.4);cursor:pointer;color:#00CC66;font-family:Cinzel,serif;font-size:9px;letter-spacing:1px;}
+#timer-display{color:#00CC66;font-family:Cinzel,serif;font-size:13px;font-weight:700;letter-spacing:2px;}
 #go{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.95);flex-direction:column;align-items:center;justify-content:center;z-index:9999;}
 #go.show{display:flex;}
 #gt{font-family:Cinzel,serif;font-size:clamp(44px,7vw,76px);font-weight:900;color:#FF1C1C;letter-spacing:10px;animation:gp 1.4s infinite;}
+/* EVENT CARD OVERLAY */
+#card-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.88);z-index:8888;align-items:center;justify-content:center;padding:20px;}
+#card-overlay.show{display:flex;}
+#event-card{background:linear-gradient(160deg,#0e1f10,#0a1828);border:2px solid rgba(100,180,80,0.4);border-radius:16px;max-width:680px;width:100%;padding:28px 32px;position:relative;box-shadow:0 0 40px rgba(0,0,0,0.8);}
+#card-close{position:absolute;top:12px;right:16px;background:transparent;border:none;color:rgba(255,255,255,0.5);font-size:22px;cursor:pointer;line-height:1;}
+#card-type{font-family:Cinzel,serif;font-size:10px;letter-spacing:3px;margin-bottom:6px;}
+#card-zone{font-size:9px;letter-spacing:2px;font-family:Lato,sans-serif;opacity:0.7;margin-bottom:10px;}
+#card-title{font-family:Cinzel,serif;font-size:22px;font-weight:900;color:#F0E0C0;margin-bottom:12px;line-height:1.2;}
+#card-desc{font-size:13px;color:rgba(255,255,255,0.82);line-height:1.6;margin-bottom:18px;}
+.card-section{margin-bottom:12px;}
+.card-section-title{font-family:Cinzel,serif;font-size:9px;letter-spacing:2px;opacity:0.7;margin-bottom:4px;}
+.card-section-body{font-size:12px;line-height:1.5;}
+#card-positive-effect{font-size:15px;color:#90EE90;font-weight:700;line-height:1.5;}
 @keyframes rp{0%,100%{opacity:1}50%{opacity:0.4}}
 @keyframes spin{to{transform:rotate(360deg)}}
 @keyframes gp{0%,100%{text-shadow:0 0 40px #f00,0 0 80px #f0004d}50%{text-shadow:0 0 80px #f00,0 0 160px #f000bb}}
+@keyframes cardIn{from{opacity:0;transform:scale(0.85)}to{opacity:1;transform:scale(1)}}
 </style>
 </head>
 <body>
@@ -52,14 +72,28 @@ body{width:100vw;height:100vh;overflow:hidden;background:linear-gradient(155deg,
 </div>
 <div id="eb">
 <div style="flex:1"><div id="el">ESCALATION 0/20</div><div id="es"></div></div>
-<div style="display:flex;flex-direction:column;align-items:center;flex-shrink:0">
-<button id="gb" onclick="pR()">&#127757;</button>
-<div id="zl"></div>
+<div id="controls">
+<button id="globe-btn" onclick="drawEvent()">&#127757;</button>
+<div id="timer-display">5:00</div>
+<button id="timer-btn" onclick="toggleTimer()">START</button>
 </div>
 </div>
 </div>
 </div>
+
 <div id="go"><div id="gt">GAME OVER</div></div>
+
+<div id="card-overlay">
+<div id="event-card">
+  <button id="card-close" onclick="closeCard()">&#10005;</button>
+  <div id="card-type"></div>
+  <div id="card-zone"></div>
+  <div id="card-title"></div>
+  <div id="card-desc"></div>
+  <div id="card-sections"></div>
+</div>
+</div>
+
 <script>
 var IN=[
   {l:'Operatori umanitari',c:'#44CC66'},
@@ -75,9 +109,212 @@ var ZN=[
   {id:4,n:'Asia',ll:[[717,216],[747,216],[777,216],[717,242],[747,242],[777,242],[717,268],[747,268],[777,268]]},
   {id:5,n:'Oceania',ll:[[814,507],[844,507],[874,507],[814,533],[844,533],[874,533],[814,559],[844,559],[874,559]]}
 ];
+
+var EVENTS=[
+  {pos:false,zone:'Africa',title:'Alluvione improvvisa',
+   desc:'Piogge eccezionali distruggono villaggi e sommergono campi coltivati. Migliaia di sfollati senza cibo ne riparo.',
+   solve:'3 Logistica + 2 Umanitari + 1 Diplomatici',
+   slow:'2 Logistica + 1 Umanitari',
+   ignore:'Le acque avanzano verso le citta. I villaggi vengono abbandonati.',
+   ignoreRes:'6 Logistica + 4 Umanitari + 2 Diplomatici'},
+  {pos:false,zone:'Africa',title:'Epidemia in zona remota',
+   desc:'Un\'epidemia di colera si diffonde in una regione senza ospedali ne strade praticabili. I medici locali sono sopraffatti.',
+   solve:'3 Umanitari + 2 Logistica + 1 Mediatori',
+   slow:'2 Umanitari + 1 Logistica',
+   ignore:'L\'epidemia raggiunge i centri urbani. Le autorita perdono il controllo.',
+   ignoreRes:'9 Umanitari + 6 Logistica + 3 Mediatori'},
+  {pos:false,zone:'Medio Oriente',title:'Campo profughi sovraffollato',
+   desc:'Un campo profughi supera tre volte la sua capacita. Mancano acqua, medicine e riparo. Le tensioni interne stanno esplodendo.',
+   solve:'3 Umanitari + 2 Diplomatici + 1 Mediatori',
+   slow:'2 Umanitari + 1 Diplomatici',
+   ignore:'Scoppia una rivolta nel campo. Le autorita reagiscono con la forza.',
+   ignoreRes:'6 Umanitari + 4 Diplomatici + 2 Mediatori'},
+  {pos:false,zone:'Europa',title:'Blocco navale umanitario',
+   desc:'Un paese blocca le navi umanitarie dirette verso un\'isola colpita da un terremoto. Gli aiuti restano fermi in porto da giorni.',
+   solve:'4 Diplomatici + 2 Logistica',
+   slow:'2 Diplomatici + 1 Logistica',
+   ignore:'Gli aiuti non arrivano. Le vittime aumentano, la comunita internazionale si divide.',
+   ignoreRes:'8 Diplomatici + 4 Logistica'},
+  {pos:false,zone:'Africa',title:'Siccita prolungata',
+   desc:'Tre anni senza piogge costringono intere popolazioni ad abbandonare le terre. Iniziano migrazioni di massa verso i paesi vicini.',
+   solve:'3 Logistica + 2 Umanitari + 2 Diplomatici',
+   slow:'2 Logistica + 1 Umanitari',
+   ignore:'I flussi migratori destabilizzano i paesi vicini. Le frontiere vengono chiuse con la forza.',
+   ignoreRes:'9 Logistica + 6 Umanitari + 6 Diplomatici'},
+  {pos:false,zone:'Asia',title:'Conflitto per l\'acqua',
+   desc:'Due paesi si contendono le acque di un fiume condiviso. Le tensioni rischiano di diventare violente. I civili nelle zone di confine fuggono.',
+   solve:'4 Diplomatici + 2 Mediatori',
+   slow:'2 Diplomatici + 1 Mediatori',
+   ignore:'Schermaglie al confine. L\'esercito viene mobilitato da entrambe le parti.',
+   ignoreRes:'12 Diplomatici + 6 Mediatori'},
+  {pos:false,zone:'Europa',title:'Naufragio nel Mediterraneo',
+   desc:'Un barcone con 400 migranti affonda. I sopravvissuti vengono respinti da tre paesi diversi. Nessuno vuole assumersi la responsabilita.',
+   solve:'2 Umanitari + 3 Diplomatici + 1 Mediatori',
+   slow:'2 Umanitari + 1 Diplomatici',
+   ignore:'Altri barconi si mettono in mare senza soccorsi. Le morti aumentano.',
+   ignoreRes:'4 Umanitari + 6 Diplomatici + 2 Mediatori'},
+  {pos:false,zone:'Africa',title:'Rapimento di studenti',
+   desc:'Un gruppo armato rapisce studenti da una scuola rurale. Le famiglie fuggono dalla zona. Le organizzazioni umanitarie non riescono ad accedere.',
+   solve:'3 Diplomatici + 2 Umanitari + 2 Mediatori',
+   slow:'2 Diplomatici + 1 Umanitari',
+   ignore:'La regione si svuota. Il gruppo armato rafforza il controllo del territorio.',
+   ignoreRes:'9 Diplomatici + 6 Umanitari + 6 Mediatori'},
+  {pos:false,zone:'Medio Oriente',title:'Terremoto in zona di guerra',
+   desc:'Un terremoto colpisce una regione gia devastata dal conflitto. Gli aiuti non riescono ad entrare per via dei combattimenti ancora in corso.',
+   solve:'3 Logistica + 2 Umanitari + 2 Diplomatici',
+   slow:'2 Logistica + 1 Umanitari',
+   ignore:'Le macerie bloccano le ultime vie di accesso. Migliaia di persone rimangono intrappolate.',
+   ignoreRes:'9 Logistica + 6 Umanitari + 6 Diplomatici'},
+  {pos:false,zone:'America Sud',title:'Crisi alimentare',
+   desc:'La mancanza di cibo spinge milioni di persone a emigrare verso i paesi vicini, che chiudono le frontiere. Le famiglie si disperdono.',
+   solve:'3 Umanitari + 2 Diplomatici + 1 Logistica',
+   slow:'2 Umanitari + 1 Logistica',
+   ignore:'Le frontiere chiuse generano violenza. I campi improvvisati si riempiono oltre ogni limite.',
+   ignoreRes:'6 Umanitari + 4 Diplomatici + 2 Logistica'},
+  {pos:false,zone:'Asia',title:'Inquinamento del fiume',
+   desc:'Scarichi industriali avvelenano il principale fiume del paese. Intere comunita perdono acqua potabile e pescato. I bambini si ammalano.',
+   solve:'2 Logistica + 2 Diplomatici + 2 Umanitari',
+   slow:'2 Logistica + 1 Umanitari',
+   ignore:'Le malattie si diffondono. I villaggi a valle vengono abbandonati.',
+   ignoreRes:'4 Logistica + 4 Diplomatici + 4 Umanitari'},
+  {pos:false,zone:'Africa',title:'Colpo di stato',
+   desc:'Un gruppo militare prende il potere. Le organizzazioni umanitarie vengono espulse dal paese. La popolazione civile rimane senza assistenza.',
+   solve:'4 Diplomatici + 2 Mediatori',
+   slow:'2 Diplomatici + 1 Mediatori',
+   ignore:'La repressione si intensifica. I confini vengono chiusi, nessuna informazione filtra fuori.',
+   ignoreRes:'12 Diplomatici + 6 Mediatori'},
+  {pos:false,zone:'Europa',title:'Ondata di freddo estremo',
+   desc:'Un\'ondata di gelo colpisce popolazioni gia sfollate dalla guerra, senza riscaldamento ne rifugi adeguati. Anziani e bambini sono i piu a rischio.',
+   solve:'3 Logistica + 2 Umanitari + 1 Diplomatici',
+   slow:'2 Logistica + 1 Umanitari',
+   ignore:'Le vittime aumentano rapidamente. I rifugi improvvisati collassano sotto la neve.',
+   ignoreRes:'6 Logistica + 4 Umanitari + 2 Diplomatici'},
+  {pos:false,zone:'Asia',title:'Disputa territoriale',
+   desc:'Due paesi rivendicano la stessa isola. Le navi militari si fronteggiano, bloccando le rotte commerciali. La situazione e sul filo del rasoio.',
+   solve:'5 Diplomatici + 1 Mediatori',
+   slow:'3 Diplomatici',
+   ignore:'Primo incidente navale. Entrambi i paesi dichiarano lo stato di allerta.',
+   ignoreRes:'15 Diplomatici + 3 Mediatori'},
+  {pos:false,zone:'America Nord',title:'Emergenza carceraria',
+   desc:'Un carcere sovraffollato va a fuoco durante una rivolta. I detenuti fuggono, le autorita non controllano la situazione.',
+   solve:'2 Logistica + 2 Umanitari + 2 Diplomatici',
+   slow:'2 Logistica + 1 Diplomatici',
+   ignore:'Le bande riprendono il controllo di interi quartieri. La violenza si espande.',
+   ignoreRes:'4 Logistica + 4 Umanitari + 4 Diplomatici'},
+  {pos:false,zone:'America Sud',title:'Incendi in Amazzonia',
+   desc:'Incendi dolosi distruggono milioni di ettari di foresta. Comunita indigene perdono le loro terre. Il fumo rende l\'aria irrespirabile per centinaia di km.',
+   solve:'3 Logistica + 2 Diplomatici + 1 Mediatori',
+   slow:'2 Logistica + 1 Diplomatici',
+   ignore:'La perdita di foresta accelera la siccita. Altre comunita vengono colpite.',
+   ignoreRes:'9 Logistica + 6 Diplomatici + 3 Mediatori'},
+  {pos:false,zone:'Asia',title:'Persecuzione di una minoranza',
+   desc:'Una minoranza etnica viene espulsa dalle proprie case. I villaggi vengono bruciati, le famiglie fuggono verso il confine. Il governo nega tutto.',
+   solve:'3 Diplomatici + 2 Umanitari + 2 Mediatori',
+   slow:'2 Umanitari + 1 Mediatori',
+   ignore:'La crisi diventa un esodo di massa. I paesi confinanti chiudono le frontiere.',
+   ignoreRes:'9 Diplomatici + 6 Umanitari + 6 Mediatori'},
+  {pos:false,zone:'Europa',title:'Crollo economico',
+   desc:'Una grave crisi economica porta disoccupazione di massa. Aumentano poverta estrema e tensioni sociali. I movimenti estremisti guadagnano consenso.',
+   solve:'3 Diplomatici + 2 Mediatori + 1 Umanitari',
+   slow:'2 Diplomatici + 1 Mediatori',
+   ignore:'Proteste violente nelle piazze. Il governo rischia di cadere.',
+   ignoreRes:'6 Diplomatici + 4 Mediatori + 2 Umanitari'},
+  {pos:false,zone:'Africa',title:'Pirateria marittima',
+   desc:'Pirati armati sequestrano navi cargo con aiuti umanitari. Le rotte di rifornimento vengono bloccate. Le organizzazioni umanitarie non sanno come procedere.',
+   solve:'3 Diplomatici + 2 Logistica + 1 Umanitari',
+   slow:'2 Logistica + 1 Diplomatici',
+   ignore:'Le navi umanitarie smettono di transitare nella zona. Gli aiuti si interrompono.',
+   ignoreRes:'6 Diplomatici + 4 Logistica + 2 Umanitari'},
+  {pos:false,zone:'Europa',title:'Tensioni tra comunita',
+   desc:'Tensioni crescenti tra popolazione locale e comunita migranti in diverse citta. Episodi di violenza e discriminazione. I media alimentano la divisione.',
+   solve:'3 Mediatori + 2 Diplomatici + 1 Umanitari',
+   slow:'2 Mediatori + 1 Diplomatici',
+   ignore:'La violenza aumenta. Le comunita si chiudono in se stesse, il dialogo si interrompe.',
+   ignoreRes:'6 Mediatori + 4 Diplomatici + 2 Umanitari'},
+  {pos:false,zone:'Asia',title:'Crisi nucleare',
+   desc:'Test missilistici ravvicinati alla frontiera aumentano le tensioni regionali. I paesi vicini chiedono garanzie urgenti. Il panico si diffonde tra i civili.',
+   solve:'6 Diplomatici',
+   slow:'3 Diplomatici + 1 Mediatori',
+   ignore:'I paesi vicini iniziano esercitazioni militari. La situazione e fuori controllo.',
+   ignoreRes:'18 Diplomatici'},
+  {pos:false,zone:'Asia',title:'Sfruttamento minorile',
+   desc:'Un\'inchiesta rivela migliaia di bambini al lavoro in fabbriche in condizioni disumane. Il governo nega. Le aziende internazionali coinvolte tacciono.',
+   solve:'2 Diplomatici + 2 Mediatori + 2 Umanitari',
+   slow:'2 Mediatori + 1 Umanitari',
+   ignore:'Il fenomeno si espande. Le testimonianze spariscono, il silenzio si consolida.',
+   ignoreRes:'4 Diplomatici + 4 Mediatori + 4 Umanitari'},
+  {pos:false,zone:'Africa',title:'Crisi idrica urbana',
+   desc:'Una grande citta rimane senza acqua corrente per settimane. Nei quartieri piu poveri scoppia il caos. I pozzi vengono contesi con la violenza.',
+   solve:'3 Logistica + 2 Umanitari + 1 Diplomatici',
+   slow:'2 Logistica + 1 Umanitari',
+   ignore:'Saccheggi e violenze si moltiplicano. Le famiglie abbandonano la citta.',
+   ignoreRes:'6 Logistica + 4 Umanitari + 2 Diplomatici'},
+  {pos:false,zone:'Europa',title:'Traffico di esseri umani',
+   desc:'Viene scoperta una rete di traffico di persone che attraversa diversi paesi. Le vittime sono centinaia, molte minori. Le autorita di diversi paesi non cooperano.',
+   solve:'3 Diplomatici + 2 Mediatori + 2 Umanitari',
+   slow:'2 Diplomatici + 1 Umanitari',
+   ignore:'La rete si espande verso altri paesi. Le vittime aumentano, nessuno viene processato.',
+   ignoreRes:'9 Diplomatici + 6 Mediatori + 6 Umanitari'},
+  {pos:false,zone:'Oceania',title:'Tsunami',
+   desc:'Un violento tsunami colpisce le coste. Interi villaggi vengono spazzati via. I soccorsi non riescono ad arrivare per via delle strade distrutte.',
+   solve:'4 Logistica + 3 Umanitari',
+   slow:'2 Logistica + 2 Umanitari',
+   ignore:'Le malattie si diffondono nei campi improvvisati. Le persone perdono ogni speranza di aiuto.',
+   ignoreRes:'8 Logistica + 6 Umanitari'},
+  {pos:false,zone:'America Nord',title:'Crisi diplomatica alle frontiere',
+   desc:'Una decisione unilaterale sul confine crea una crisi diplomatica. Le relazioni si interrompono, i flussi di aiuti si bloccano. I migranti restano intrappolati.',
+   solve:'4 Diplomatici + 2 Mediatori',
+   slow:'2 Diplomatici + 1 Mediatori',
+   ignore:'Anche altri paesi prendono posizione. La crisi si allarga a livello regionale.',
+   ignoreRes:'8 Diplomatici + 4 Mediatori'},
+  {pos:false,zone:'Africa',title:'Violenza nelle zone di conflitto',
+   desc:'Rapporti documentano violenze sistematiche contro i civili nelle zone di guerra. Nessuna organizzazione riesce ad accedere. I testimoni hanno paura di parlare.',
+   solve:'3 Diplomatici + 2 Umanitari + 2 Mediatori',
+   slow:'2 Umanitari + 1 Mediatori',
+   ignore:'Il silenzio si consolida. Chi denuncia viene messo a tacere.',
+   ignoreRes:'9 Diplomatici + 6 Umanitari + 6 Mediatori'},
+  {pos:false,zone:'Asia',title:'Blocco degli aiuti',
+   desc:'Un governo espelle le organizzazioni umanitarie internazionali. Milioni di persone restano senza assistenza medica ne cibo. La situazione e critica.',
+   solve:'4 Diplomatici + 2 Logistica',
+   slow:'2 Diplomatici + 1 Logistica',
+   ignore:'Le organizzazioni si ritirano completamente. La popolazione e abbandonata a se stessa.',
+   ignoreRes:'12 Diplomatici + 6 Logistica'},
+  {pos:false,zone:'Asia',title:'Smog record nelle megalopoli',
+   desc:'Livelli record di inquinamento paralizzano le citta. Ospedali al collasso, scuole chiuse, milioni di persone non possono uscire di casa.',
+   solve:'2 Diplomatici + 2 Logistica + 2 Umanitari',
+   slow:'2 Logistica + 1 Umanitari',
+   ignore:'Le malattie respiratorie esplodono. I piu poveri, senza protezioni, sono i piu colpiti.',
+   ignoreRes:'4 Diplomatici + 4 Logistica + 4 Umanitari'},
+  {pos:false,zone:'America Sud',title:'Crollo di una scuola',
+   desc:'Un terremoto fa crollare una scuola. Centinaia di bambini sono dispersi. I soccorsi non riescono ad arrivare, le famiglie non ricevono informazioni.',
+   solve:'3 Logistica + 3 Umanitari',
+   slow:'2 Logistica + 1 Umanitari',
+   ignore:'Il panico si diffonde. Le famiglie abbandonano la zona, la comunita si dissolve.',
+   ignoreRes:'6 Logistica + 6 Umanitari'},
+  {pos:true,zone:'Mondo',title:'Accordo di pace storico',
+   emoji:'\uD83D\uDD4A\uFE0F',
+   desc:'Due paesi in conflitto da decenni firmano un accordo di pace mediato dalla comunita internazionale. Il mondo tira un sospiro di sollievo.',
+   effect:'Tutte le squadre raddoppiano le proprie risorse per questo turno.'},
+  {pos:true,zone:'Mondo',title:'Conferenza umanitaria mondiale',
+   emoji:'\uD83C\uDF0D',
+   desc:'Una grande conferenza internazionale raccoglie fondi e impegni straordinari per le crisi in corso.',
+   effect:'Le squadre scelgono insieme un continente e spengono tutte le luci accese su di esso.'},
+  {pos:true,zone:'Mondo',title:'Cessate il fuoco globale',
+   emoji:'\u262E\uFE0F',
+   desc:'Su iniziativa delle Nazioni Unite, tutti i conflitti attivi osservano un cessate il fuoco temporaneo. Gli aiuti umanitari raggiungono ogni angolo del mondo.',
+   effect:'La barra di escalation si dimezza.'}
+];
+
+var usedEvents=[];
 var LS=ZN.map(function(){return Array(9).fill(false);});
+var timerInterval=null;
+var timerSeconds=300;
+var timerRunning=false;
+var bonusPace=[0,0,0,0,0,0];
+
 function ec(l){var o=l.filter(Boolean).length;return o>=9?4:o>=6?2:o>=3?1:0;}
 function tt(){return Math.min(ZN.reduce(function(s,z,i){return s+ec(LS[i]);},0),20);}
+
 function uB(){
   var c=tt();
   document.getElementById('el').textContent='ESCALATION '+c+'/20';
@@ -90,6 +327,7 @@ function uB(){
   b.style.boxShadow=c>14?'0 0 18px rgba(255,10,10,0.3)':'none';
   if(c>=20)document.getElementById('go').classList.add('show');
 }
+
 function tg(zi,li){
   LS[zi][li]=!LS[zi][li];
   var on=LS[zi][li];
@@ -106,19 +344,115 @@ function tg(zi,li){
   if(gi)gi.setAttribute('display',on?'block':'none');
   uB();
 }
-function pR(){
-  var b=document.getElementById('gb');
-  b.style.animation='spin 0.65s linear';
-  setTimeout(function(){
-    b.style.animation='none';
-    var zi=Math.floor(Math.random()*ZN.length);
-    document.getElementById('zl').textContent=ZN[zi].n;
-    ZN[zi].ll.forEach(function(p,li){
-      var r=document.getElementById('rg-'+zi+'-'+li);
-      if(r){r.setAttribute('display','block');setTimeout(function(){r.setAttribute('display','none');},2800);}
-    });
-  },650);
+
+function drawEvent(){
+  var available=[];
+  for(var i=0;i<EVENTS.length;i++){
+    if(usedEvents.indexOf(i)<0)available.push(i);
+  }
+  if(available.length===0){usedEvents=[];available=EVENTS.map(function(_,i){return i;});}
+  var idx=available[Math.floor(Math.random()*available.length)];
+  usedEvents.push(idx);
+  showCard(EVENTS[idx]);
+  resetTimer();
 }
+
+function showCard(ev){
+  var isPos=ev.pos;
+  var card=document.getElementById('event-card');
+  card.style.borderColor=isPos?'rgba(100,220,100,0.5)':'rgba(220,80,80,0.4)';
+  card.style.background=isPos?'linear-gradient(160deg,#0e1f10,#0a1828)':'linear-gradient(160deg,#1f0e0e,#0a1015)';
+  document.getElementById('card-type').textContent=isPos?'\u2728 EVENTO POSITIVO':'\u26A0\uFE0F EVENTO DI CRISI';
+  document.getElementById('card-type').style.color=isPos?'#90EE90':'#FF8888';
+  document.getElementById('card-zone').textContent='\u25CF '+ev.zone.toUpperCase();
+  document.getElementById('card-zone').style.color=isPos?'#90EE90':'#FFAA88';
+  document.getElementById('card-title').textContent=(ev.emoji?ev.emoji+' ':'')+ev.title;
+  document.getElementById('card-desc').textContent=ev.desc;
+  var sec=document.getElementById('card-sections');
+  sec.innerHTML='';
+  if(isPos){
+    var ef=document.createElement('div');
+    ef.className='card-section';
+    var et=document.createElement('div');
+    et.className='card-section-title';
+    et.style.color='#90EE90';
+    et.textContent='EFFETTO';
+    var eb=document.createElement('div');
+    eb.id='card-positive-effect';
+    eb.textContent=ev.effect;
+    ef.appendChild(et);ef.appendChild(eb);sec.appendChild(ef);
+  } else {
+    var sections=[
+      {title:'PER RISOLVERE',color:'#44DD44',text:ev.solve},
+      {title:'PER RALLENTARE',color:'#FFCC44',text:ev.slow},
+      {title:'SE IGNORATO',color:'#FF6644',text:ev.ignore},
+      {title:'AL TURNO SUCCESSIVO PER RISOLVERE',color:'#FF4444',text:ev.ignoreRes}
+    ];
+    sections.forEach(function(s){
+      var d=document.createElement('div');
+      d.className='card-section';
+      var t=document.createElement('div');
+      t.className='card-section-title';
+      t.style.color=s.color;
+      t.textContent=s.title;
+      var b=document.createElement('div');
+      b.className='card-section-body';
+      b.style.color=s.color;
+      b.textContent=s.text;
+      d.appendChild(t);d.appendChild(b);sec.appendChild(d);
+    });
+  }
+  var ov=document.getElementById('card-overlay');
+  ov.classList.add('show');
+  card.style.animation='cardIn 0.3s ease';
+}
+
+function closeCard(){
+  document.getElementById('card-overlay').classList.remove('show');
+}
+
+function toggleTimer(){
+  if(timerRunning){
+    clearInterval(timerInterval);
+    timerRunning=false;
+    document.getElementById('timer-btn').textContent='START';
+    document.getElementById('timer-btn').style.background='rgba(0,100,60,0.3)';
+  } else {
+    timerRunning=true;
+    document.getElementById('timer-btn').textContent='STOP';
+    document.getElementById('timer-btn').style.background='rgba(150,0,0,0.4)';
+    timerInterval=setInterval(function(){
+      timerSeconds--;
+      if(timerSeconds<=0){
+        timerSeconds=0;
+        clearInterval(timerInterval);
+        timerRunning=false;
+        document.getElementById('timer-btn').textContent='START';
+        document.getElementById('timer-btn').style.background='rgba(0,100,60,0.3)';
+        document.getElementById('timer-display').style.color='#FF4444';
+      }
+      var m=Math.floor(timerSeconds/60);
+      var s=timerSeconds%60;
+      document.getElementById('timer-display').textContent=m+':'+(s<10?'0':'')+s;
+    },1000);
+  }
+}
+
+function resetTimer(){
+  clearInterval(timerInterval);
+  timerRunning=false;
+  timerSeconds=300;
+  document.getElementById('timer-display').textContent='5:00';
+  document.getElementById('timer-display').style.color='#00CC66';
+  document.getElementById('timer-btn').textContent='START';
+  document.getElementById('timer-btn').style.background='rgba(0,100,60,0.3)';
+}
+
+function changeBP(i,delta){
+  bonusPace[i]=Math.max(0,bonusPace[i]+delta);
+  document.getElementById('bp-'+i).textContent=bonusPace[i];
+}
+
 function bSVG(){
   var sv=document.getElementById('ms');
   var ns='http://www.w3.org/2000/svg';
@@ -130,10 +464,6 @@ function bSVG(){
       gw.setAttribute('id','g-'+zi+'-'+li);gw.setAttribute('cx',cx);gw.setAttribute('cy',cy);
       gw.setAttribute('r','14');gw.setAttribute('fill','#FF0000');gw.setAttribute('opacity','0.2');
       gw.setAttribute('filter','url(#lg)');gw.setAttribute('display','none');g.appendChild(gw);
-      var rg=document.createElementNS(ns,'circle');
-      rg.setAttribute('id','rg-'+zi+'-'+li);rg.setAttribute('cx',cx);rg.setAttribute('cy',cy);
-      rg.setAttribute('r','13');rg.setAttribute('fill','none');rg.setAttribute('stroke','#FFE566');
-      rg.setAttribute('stroke-width','2');rg.setAttribute('display','none');g.appendChild(rg);
       var ht=document.createElementNS(ns,'circle');
       ht.setAttribute('cx',cx);ht.setAttribute('cy',cy);ht.setAttribute('r','16');
       ht.setAttribute('fill','transparent');ht.style.cursor='pointer';
@@ -148,13 +478,15 @@ function bSVG(){
     sv.appendChild(g);
   });
 }
+
 function bE(){
   var c=document.getElementById('es');
   for(var i=0;i<20;i++){var s=document.createElement('div');s.className='sg';c.appendChild(s);}
 }
+
 function bT(){
   var col=document.getElementById('lc');
-  ['Squadra 1','Squadra 2','Squadra 3','Squadra 4','Squadra 5','Squadra 6'].forEach(function(nm){
+  ['Squadra 1','Squadra 2','Squadra 3','Squadra 4','Squadra 5','Squadra 6'].forEach(function(nm,si){
     var card=document.createElement('div');card.className='tc';
     var inp=document.createElement('input');inp.className='tn';inp.value=nm;card.appendChild(inp);
     IN.forEach(function(ind){
@@ -168,9 +500,20 @@ function bT(){
       val.style.border='1px solid '+ind.c+'55';val.style.color=ind.c;
       row.appendChild(dot);row.appendChild(lbl);row.appendChild(val);card.appendChild(row);
     });
+    var bpr=document.createElement('div');bpr.className='bp-row';
+    var bpl=document.createElement('div');bpl.className='bp-lbl';bpl.textContent='BONUS PACE';
+    var bpc=document.createElement('div');bpc.className='bp-ctrl';
+    var bm=document.createElement('button');bm.className='bp-btn';bm.textContent='-';
+    bm.addEventListener('click',(function(i){return function(){changeBP(i,-1);};})(si));
+    var bv=document.createElement('div');bv.className='bp-val';bv.id='bp-'+si;bv.textContent='0';
+    var bp=document.createElement('button');bp.className='bp-btn';bp.textContent='+';
+    bp.addEventListener('click',(function(i){return function(){changeBP(i,1);};})(si));
+    bpc.appendChild(bm);bpc.appendChild(bv);bpc.appendChild(bp);
+    bpr.appendChild(bpl);bpr.appendChild(bpc);card.appendChild(bpr);
     col.appendChild(card);
   });
 }
+
 bT();bE();bSVG();uB();
 </script>
 </body>
