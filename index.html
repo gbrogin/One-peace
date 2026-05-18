@@ -30,7 +30,8 @@ body{width:100vw;height:100vh;overflow:hidden;background:linear-gradient(155deg,
 #el{color:#FF4444;font-family:Cinzel,serif;font-size:11px;letter-spacing:2px;margin-bottom:5px;font-weight:700;}
 #es{display:flex;gap:4px;}
 .sg{width:22px;height:22px;border-radius:4px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);transition:background 0.2s;flex-shrink:0;}
-#controls{display:flex;flex-direction:column;align-items:center;gap:6px;flex-shrink:0;}
+#controls{display:flex;flex-direction:row;align-items:center;gap:10px;flex-shrink:0;}
+#timer-block{display:flex;flex-direction:column;align-items:center;gap:3px;}
 #globe-btn{width:46px;height:46px;border-radius:50%;background:linear-gradient(135deg,#3a2800,#1a1000);border:1.5px solid rgba(200,150,50,0.5);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:24px;flex-shrink:0;}
 #timer-btn{width:46px;height:20px;border-radius:4px;background:rgba(0,100,60,0.3);border:1px solid rgba(0,200,100,0.4);cursor:pointer;color:#00CC66;font-family:Cinzel,serif;font-size:9px;letter-spacing:1px;}
 #timer-display{color:#00CC66;font-family:Cinzel,serif;font-size:13px;font-weight:700;letter-spacing:2px;}
@@ -74,8 +75,10 @@ body{width:100vw;height:100vh;overflow:hidden;background:linear-gradient(155deg,
 <div style="flex:1"><div id="el">ESCALATION 0/20</div><div id="es"></div></div>
 <div id="controls">
 <button id="globe-btn" onclick="drawEvent()">&#127757;</button>
+<div id="timer-block">
 <div id="timer-display">5:00</div>
 <button id="timer-btn" onclick="toggleTimer()">START</button>
+</div>
 </div>
 </div>
 </div>
@@ -310,9 +313,9 @@ var LS=ZN.map(function(){return Array(9).fill(false);});
 var timerInterval=null;
 var timerSeconds=300;
 var timerRunning=false;
-var bonusPace=[0,0,0,0,0,0];
+var bonusPace=[0,0,0,0,0];
 
-function ec(l){var o=l.filter(Boolean).length;return o>=9?4:o>=6?2:o>=3?1:0;}
+function ec(l){var o=l.filter(Boolean).length;return o>=9?6:o>=6?3:o>=3?1:0;}
 function tt(){return Math.min(ZN.reduce(function(s,z,i){return s+ec(LS[i]);},0),20);}
 
 function uB(){
@@ -345,6 +348,18 @@ function tg(zi,li){
   uB();
 }
 
+function zoneIndex(zoneName){
+  var map={'America Nord':0,'America Sud':1,'Europa':2,'Africa':3,'Asia':4,'Oceania':5};
+  return map[zoneName];
+}
+function autoLight(zoneName){
+  var zi=zoneIndex(zoneName);
+  if(zi===undefined||zi===null)return;
+  var lights=LS[zi];
+  var firstOff=-1;
+  for(var i=0;i<lights.length;i++){if(!lights[i]){firstOff=i;break;}}
+  if(firstOff>=0){tg(zi,firstOff);}
+}
 function drawEvent(){
   var available=[];
   for(var i=0;i<EVENTS.length;i++){
@@ -353,7 +368,9 @@ function drawEvent(){
   if(available.length===0){usedEvents=[];available=EVENTS.map(function(_,i){return i;});}
   var idx=available[Math.floor(Math.random()*available.length)];
   usedEvents.push(idx);
-  showCard(EVENTS[idx]);
+  var ev=EVENTS[idx];
+  showCard(ev);
+  if(!ev.pos){autoLight(ev.zone);}
   resetTimer();
 }
 
@@ -486,7 +503,7 @@ function bE(){
 
 function bT(){
   var col=document.getElementById('lc');
-  ['Squadra 1','Squadra 2','Squadra 3','Squadra 4','Squadra 5','Squadra 6'].forEach(function(nm,si){
+  ['Squadra 1','Squadra 2','Squadra 3','Squadra 4','Squadra 5'].forEach(function(nm,si){
     var card=document.createElement('div');card.className='tc';
     var inp=document.createElement('input');inp.className='tn';inp.value=nm;card.appendChild(inp);
     IN.forEach(function(ind){
